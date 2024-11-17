@@ -18,8 +18,11 @@ export default function Login() {
     const validPassword = process.env.NEXT_PUBLIC_EMAIL_PASSWORD_LOGIN;
 
     if (email === String(validEmail) && password === String(validPassword)) {
-      localStorage.setItem("isAuthenticated", "true");
-      router.push("/");
+      // Optionally, store the authenticated state in a global state (e.g., Context API)
+      // or pass it to the router as state, or use cookies for authentication.
+
+      // For example, redirecting after successful login:
+      router.push("/"); // Redirect to homepage after login
     } else {
       setError("Invalid email or password");
     }

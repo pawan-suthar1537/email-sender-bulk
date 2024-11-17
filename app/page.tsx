@@ -7,14 +7,15 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (isAuthenticated !== "true") {
+    // Simulate authentication check
+    const authState = sessionStorage.getItem("isAuthenticated"); // Or cookies/session management
+    if (authState !== "true") {
       router.push("/login");
     }
   }, [router]);
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
+    sessionStorage.removeItem("isAuthenticated");
     router.push("/login");
   };
 
