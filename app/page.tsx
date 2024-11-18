@@ -4,21 +4,7 @@ import { useRouter } from "next/navigation";
 import EmailSender from "@/components/email-sender";
 
 export default function HomePage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Simulate authentication check
-    const authState = sessionStorage.getItem("isAuthenticated"); // Or cookies/session management
-    if (authState !== "true") {
-      router.push("/login");
-    }
-  }, [router]);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("isAuthenticated");
-    router.push("/login");
-  };
-
+ 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -29,12 +15,7 @@ export default function HomePage() {
           <p className="text-lg text-gray-600">
             Send emails to multiple recipients with attachments
           </p>
-          <button
-            onClick={handleLogout}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-          >
-            Logout
-          </button>
+          
         </div>
         <EmailSender />
       </div>
