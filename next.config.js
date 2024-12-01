@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const withPWA = require("next-pwa");
+const BundleAnalyzer = require("@next/bundle-analyzer");
 
 const nextConfig = {
   eslint: {
@@ -14,10 +15,17 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA({
-  dest: "public",
-  disable: process.env.NODE_ENV !== "development",
+const withBundleAnalyzer = BundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
+// PWA configuration
+const withPWAConfig = withPWA({
+  dest: "public",
+  disable: process.env.NODE_ENV !== "production",
   register: true,
   skipWaiting: true,
-})(nextConfig);
+});
+
+// Compose both configurations
+module.exports = withBundleAnalyzer(withPWAConfig(nextConfig));
